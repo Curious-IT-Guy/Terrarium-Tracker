@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace terra.Controllers
 {
@@ -10,6 +12,11 @@ namespace terra.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private static dynamic _config =
+            JsonConvert.DeserializeObject(System.IO.File.ReadAllText(@"config/appsettings.json"));
+
+        private string _connection = _config.ConnectionStrings.DefaultConnection;
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
