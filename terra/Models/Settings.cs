@@ -7,44 +7,24 @@ namespace terra.Models
 {
     public class Settings
     {
-        private int _id;
-        private int _light;
-        private float _temp;
-        private float _humid;
+        public int Id { get; set; }
+        public int Light { get; set; }
+        public float Temp { get; set; }
+        public float Humid { get; set; }
+        public TimeSpan Time { get; set; }
 
-        public Settings(int id, int light, float temp, float humid)
+
+        public Settings(int id, int light, float temp, float humid, TimeSpan time)
         {
-            _id = id;
-            _light = light;
-            _temp = temp;
-            _humid = humid;
+            Id = id;
+            Light = light;
+            Temp = temp;
+            Humid = humid;
+            Time = time;
         }
 
         public Settings() {}
 
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        public int Light
-        {
-            get { return _light; }
-            set { _light = value; }
-        }
-
-        public float Temp
-        {
-            get { return _temp; }
-            set { _temp = value; }
-        }
-
-        public float Humid
-        {
-            get { return _humid; }
-            set { _humid = value; }
-        }
 
         public override string ToString()
         {

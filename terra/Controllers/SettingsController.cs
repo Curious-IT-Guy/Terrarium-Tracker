@@ -10,12 +10,13 @@ namespace terra.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class SettingsController : ControllerBase
     {
         private static dynamic _config =
             JsonConvert.DeserializeObject(System.IO.File.ReadAllText(@"config/appsettings.json"));
 
         private string _connection = _config.ConnectionStrings.DefaultConnection;
+        private string _timeAPI = @"http://worldclockapi.com/api/json/utc/now";
 
         // GET api/values
         [HttpGet]
