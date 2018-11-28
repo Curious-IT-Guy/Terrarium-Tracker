@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using terra.Models;
 
 namespace terra.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/settings")]
     [ApiController]
     public class SettingsController : ControllerBase
     {
@@ -18,36 +20,31 @@ namespace terra.Controllers
         private string _connection = _config.ConnectionStrings.DefaultConnection;
         private string _timeAPI = @"http://worldclockapi.com/api/json/utc/now";
 
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        // GET api/settings/day
+        [HttpGet("day")]
+        public Settings GetDay()
         {
-            return new string[] { "value1", "value2" };
+            return null;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        // GET api/settings/day
+        public Settings GetNight()
         {
-            return "value";
+            return null;
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // PUT api/settings/day
+        [HttpPut("day")]
+        public void PutDay(int id, [FromBody] string value)
         {
+            
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/settings/night
+        [HttpPut("night")]
+        public void PutNight(int id, [FromBody] string value)
         {
-        }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
