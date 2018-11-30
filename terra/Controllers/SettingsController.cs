@@ -18,7 +18,6 @@ namespace terra.Controllers
             JsonConvert.DeserializeObject(System.IO.File.ReadAllText(@"config/appsettings.json"));
 
         private string _connection = _config.ConnectionStrings.DefaultConnection;
-        //private string _timeAPI = @"http://worldclockapi.com/api/json/utc/now";
 
         // GET api/settings/day
         [HttpGet("day")]

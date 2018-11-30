@@ -5,29 +5,24 @@ using System.Threading.Tasks;
 
 namespace terra.Models
 {
-    public class Settings
+    public class Status
     {
         public int Id { get; set; }
-        public int Light { get; set; }
         public float Temp { get; set; }
         public float Humid { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateTime Timestamp { get; set; }
 
-        public Settings(int id, int light, float temp, float humid, TimeSpan time)
+        public Status(float temp, float humid)
         {
-            Id = id;
-            Light = light;
             Temp = temp;
             Humid = humid;
-            Time = time;
         }
 
-        public Settings() {}
-
+        public Status() { }
 
         public override string ToString()
         {
-            return $"Id: {Id}, Light: {Light}, Temp: {Temp}, Humid: {Humid}, Time: {Time}";
+            return $"Id: {Id}, Temp: {Temp}, Humid: {Humid}, Timestamp: {Timestamp}";
         }
     }
 }
