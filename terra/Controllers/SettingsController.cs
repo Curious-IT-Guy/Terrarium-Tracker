@@ -36,7 +36,7 @@ namespace terra.Controllers
                     daySettings.Light = Int32.Parse(result[1].ToString());
                     daySettings.Temp = float.Parse(result[2].ToString());
                     daySettings.Humid = float.Parse(result[3].ToString());
-                    daySettings.Time = (TimeSpan) result[4];
+                    daySettings.Time = (TimeSpan)result[4];
                 }
                 return daySettings;
             }
@@ -66,16 +66,28 @@ namespace terra.Controllers
 
         // PUT api/settings/day
         [HttpPut("day")]
-        public void PutDay(int id, [FromBody] string value)
+        public void PutDay([FromBody] Settings settings)
         {
-            
+            using (var conn = new SqlConnection(_connection))
+            {
+                conn.Open();
+                var cmd = new SqlCommand($"UPDATE day_settings SET id = '{settings.Id}', light = '{settings.Light}', temp = '{settings.Temp}', humid = '{settings.Humid}'," +
+                                         $"time = '{settings.Time}' WHERE id = {settings.Id}", conn);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         // PUT api/settings/night
         [HttpPut("night")]
-        public void PutNight(int id, [FromBody] string value)
+        public void PutNight([FromBody] Settings settings)
         {
-
+            using (var conn = new SqlConnection(_connection))
+            {
+                conn.Open();
+                var cmd = new SqlCommand($"UPDATE night_settings SET id = '{settings.Id}', light = '{settings.Light}', temp = '{settings.Temp}', humid = '{settings.Humid}'," +
+                                         $"time = '{settings.Time}' WHERE id = {settings.Id}", conn);
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -28,8 +28,7 @@ namespace terra.Models
 
         public override string ToString()
         {
-            return $"{Id}, {Light}, {Temp}, {Humid}";
-
+            return $"Id: {Id}, Light: {Light}, Temp: {Temp}, Humid: {Humid}, Time: {Time}";
         }
     }
 }
