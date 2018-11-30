@@ -18,19 +18,50 @@ namespace terra.Controllers
             JsonConvert.DeserializeObject(System.IO.File.ReadAllText(@"config/appsettings.json"));
 
         private string _connection = _config.ConnectionStrings.DefaultConnection;
-        private string _timeAPI = @"http://worldclockapi.com/api/json/utc/now";
+        //private string _timeAPI = @"http://worldclockapi.com/api/json/utc/now";
 
         // GET api/settings/day
         [HttpGet("day")]
         public Settings GetDay()
         {
-            return null;
+            using (var conn = new SqlConnection(_connection))
+            {
+                var cmd = new SqlCommand($"SELECT * FROM day_settings", conn);
+                conn.Open();
+                SqlDataReader result = cmd.ExecuteReader();
+                Settings daySettings = new Settings();
+                while (result.Read())
+                {
+                    daySettings.Id = Int32.Parse(result[0].ToString());
+                    daySettings.Light = Int32.Parse(result[1].ToString());
+                    daySettings.Temp = float.Parse(result[2].ToString());
+                    daySettings.Humid = float.Parse(result[3].ToString());
+                    daySettings.Time = (TimeSpan) result[4];
+                }
+                return daySettings;
+            }
         }
 
-        // GET api/settings/day
+        // GET api/settings/night
+        [HttpGet("night")]
         public Settings GetNight()
         {
-            return null;
+            using (var conn = new SqlConnection(_connection))
+            {
+                var cmd = new SqlCommand($"SELECT * FROM night_settings", conn);
+                conn.Open();
+                SqlDataReader result = cmd.ExecuteReader();
+                Settings nightSettings = new Settings();
+                while (result.Read())
+                {
+                    nightSettings.Id = Int32.Parse(result[0].ToString());
+                    nightSettings.Light = Int32.Parse(result[1].ToString());
+                    nightSettings.Temp = float.Parse(result[2].ToString());
+                    nightSettings.Humid = float.Parse(result[3].ToString());
+                    nightSettings.Time = (TimeSpan)result[4];
+                }
+                return nightSettings;
+            }
         }
 
         // PUT api/settings/day
