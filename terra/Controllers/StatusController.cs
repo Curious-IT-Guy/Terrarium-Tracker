@@ -55,6 +55,7 @@ namespace terra.Controllers
             {
                 dynamic response = JsonConvert.DeserializeObject(client.GetStringAsync(_timeAPI).Result);
                 currentTime = response.currentDateTime;
+                currentTime = currentTime.AddHours(1.0);
             }
             string currentTimeFormatted = currentTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
