@@ -29,7 +29,7 @@ namespace terra.Controllers
         {
             using (var conn = new SqlConnection(_connection))
             {
-                var cmd = new SqlCommand($"SELECT TOP 10 * FROM Status ORDER BY timestamp DESC", conn);
+                var cmd = new SqlCommand($"SELECT TOP 1 * FROM Status ORDER BY timestamp DESC", conn);
                 conn.Open();
                 var result = cmd.ExecuteReader();
                 var resultList = new List<Status>();
@@ -65,7 +65,7 @@ namespace terra.Controllers
                 var cmd = new SqlCommand($"INSERT INTO Status VALUES('{status.Temp}', '{status.Humid}', '{currentTimeFormatted}')", conn);
                 cmd.ExecuteNonQuery();
 
-                var deleteOldRecords = new SqlCommand("DELETE FROM Status WHERE id IN (SELECT id FROM Status ORDER BY timestamp DESC OFFSET 10 ROWS)", conn);
+                var deleteOldRecords = new SqlCommand("DELETE FROM Status WHERE id IN (SELECT id FROM Status ORDER BY timestamp DESC OFFSET 1 ROWS)", conn);
                 deleteOldRecords.ExecuteNonQuery();
             }
         }
