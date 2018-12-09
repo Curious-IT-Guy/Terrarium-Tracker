@@ -14,7 +14,6 @@ namespace terra.Models
         public float Humid { get; set; }
         public DateTime Timestamp { get; set; }
         public bool Light { get; set; }
-        public int FkAnimalId { get; set; }
 
         public Status() { }
     }

@@ -39,7 +39,7 @@ namespace terra
             app.UseCors(
                 options =>
                 {
-                    options.AllowAnyOrigin().AllowAnyMethod(); // allow everything from anywhere
+                    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); // allow everything from anywhere
                 });
 
             app.UseMvc();

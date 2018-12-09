@@ -26,32 +26,24 @@ namespace terra.Controllers
 
         // GET: api/status
         [HttpGet]
-        public IEnumerable<object> Get()
+        public object Get()
         {
             using (var conn = new SqlConnection(_connection))
             {
-                var cmd = new SqlCommand("SELECT TOP 1 * FROM Status LEFT JOIN Animals ON Status.fk_animal_id = Animals.id ORDER BY timestamp DESC", conn);
+                var cmd = new SqlCommand("SELECT * FROM Status", conn);
                 conn.Open();
                 var result = cmd.ExecuteReader();
-                var resultList = new List<object>();
+                var status = new Status();
                 while (result.Read())
                 {
-                    var status = new Status();
                     status.Id = int.Parse(result[0].ToString());
                     status.IsDay = bool.Parse(result[1].ToString());
                     status.Temp = float.Parse(result[2].ToString());
                     status.Humid = float.Parse(result[3].ToString());
                     status.Light = bool.Parse(result[4].ToString());
-                    status.FkAnimalId = int.Parse(result[5].ToString());
-                    status.Timestamp = DateTime.Parse(result[6].ToString());
-
-                    var animal = new Animal();
-                    animal.Title = result[8].ToString();
-
-                    resultList.Add(status);
-                    resultList.Add(animal);
+                    status.Timestamp = DateTime.Parse(result[5].ToString());
                 }
-                return resultList;
+                return status;
             }
         }
 

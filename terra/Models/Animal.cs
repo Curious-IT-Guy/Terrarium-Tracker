@@ -13,10 +13,8 @@ namespace terra.Models
         public int FkDayId { get; set; }
         public int FkNightId { get; set; }
 
-        //public List<Settings> Settings { get; set; }
-
         public Settings DaySettings { get; set; }
-        public Settings Nightsettings { get; set; }
+        public Settings NightSettings { get; set; }
 
         public Animal() { }
     }
