@@ -63,7 +63,7 @@ namespace terra.Controllers
             using (var conn = new SqlConnection(_connection))
             {
                 conn.Open();
-                var cmd = new SqlCommand($"INSERT INTO Status VALUES('{status.Temp}', '{status.Humid}', '{currentTimeFormatted}')", conn);
+                var cmd = new SqlCommand($"INSERT INTO Status VALUES('{status.IsDay}', '{status.Temp}', '{status.Humid}', '{status.Light}','{currentTimeFormatted}')", conn);
                 cmd.ExecuteNonQuery();
 
                 var deleteOldRecords = new SqlCommand("DELETE FROM Status WHERE id IN (SELECT id FROM Status ORDER BY timestamp DESC OFFSET 10 ROWS)", conn);
