@@ -26,7 +26,7 @@ namespace terra.Controllers
 
         // GET: api/status
         [HttpGet]
-        public object Get()
+        public Status Get()
         {
             using (var conn = new SqlConnection(_connection))
             {
