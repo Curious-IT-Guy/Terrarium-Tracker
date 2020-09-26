@@ -4,7 +4,7 @@ import requests
 import json
 import datetime
 
-api_link = 'https://terraapi.azurewebsites.net/api/'
+api_link = 'URI'
 
 current_setting = {}
 is_day = False
